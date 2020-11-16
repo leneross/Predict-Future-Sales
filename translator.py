@@ -2,11 +2,10 @@ import pandas as pd
 from googletrans import Translator
 import httpx
 
-#Import items
+
+#Translate items
 items_russia = pd.read_csv('items.csv')
 
-#%%
-#Translate itemname
 trans = Translator()
 items = []
 for item in items_russia['item_name']:
@@ -14,15 +13,15 @@ for item in items_russia['item_name']:
     translate = trans.translate(item,dest='en', timeout=timeout)
     items.append(translate.text)
 
-#Create a new CSV with translated item-names. (complicated way)
+#Create a new CSV with translation
 items_to_df = pd.DataFrame(items, columns=['item_Name'])
 not_trans = items_russia[['item_id', 'item_category_id']]    
 frame = [not_trans, items_to_df]
 df_concat = pd.concat(frame, axis=1, join='inner')
 df_concat.to_csv('items_translated.csv')
 
-#%%
-# Import shops
+
+#Translate shops 
 shops_russia = pd.read_csv('shops.csv')
 
 shops = []

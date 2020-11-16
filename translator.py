@@ -30,7 +30,7 @@ for items in shops_russia['shop_name']:
     translate = trans.translate(items,dest='en', timeout=timeout)
     shops.append(translate.text)
     
-#Create new CSV with translated shop_names (easy way)
+#Create new CSV with translated shop_names 
 shops_to_df = pd.DataFrame(shops, columns=['shop_Name'])
 shops_russia['shop_Name'] = shops_to_df
 del shops_russia['shop_name']
